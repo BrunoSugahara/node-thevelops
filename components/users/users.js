@@ -2,10 +2,13 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const Joi = require('joi');
+const bcrypt = require('bcrypt');
 
 //Importing Schemas
 const User = require('./userSchema')
 const userSchemaJoi = require('./userSchemaJoi')
+//const Login = require('./userSchema')
+
 
 //usersRoutes
 
@@ -21,6 +24,8 @@ const userSchemaJoi = require('./userSchemaJoi')
  *       last_name:
  *         type: string
  *       personal_phone:
+ *         type: string
+ *       password:
  *         type: string
  */
 
@@ -94,7 +99,7 @@ router.post('/', (req, res, next) => {        //post a new user
           res.status(200).json({
              createdUser : result
              });
-           });
+         });
     }
   });
 });
@@ -194,5 +199,7 @@ router.delete('/:userId', (req, res, next) => {         //delete a specific user
       });
     })
 });
+
+
 
 module.exports = router;
